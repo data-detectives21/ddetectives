@@ -1,19 +1,110 @@
 {% extends 'car_dealer/base.html' %}
 {% block content %}
-{% csrf_token %}
+<!-- Custom CSS for animations and styling -->
+<style>
+  /* Pastel blue gradient background */
+  body {
+    background: linear-gradient(135deg, #B2EBF2, #E0F7FA, #80DEEA);
+    background-size: 200% 200%;
+    animation: gradientBackground 10s ease infinite;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+  }
+
+  /* Gradient background animation */
+  @keyframes gradientBackground {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Navbar styling */
+  .w3-bar {
+    background-color: rgba(0, 123, 255, 0.9) !important; /* Semi-transparent blue */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+
+  .w3-bar-item {
+    color: white !important;
+    transition: background-color 0.3s ease;
+  }
+
+  .w3-bar-item:hover {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+  }
+
+  /* Message container styling */
+  .w3-display-container {
+    text-align: center;
+    animation: fadeIn 1s ease, float 4s ease-in-out infinite;
+  }
+
+  .w3-display-middle {
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    max-width: 400px;
+  }
+
+  /* Fade-in animation for message */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Floating animation for message */
+  @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+  }
+
+  /* Text styling */
+  .w3-display-middle p {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  /* Link styling */
+  .w3-display-middle a {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+
+  .w3-display-middle a:hover {
+    color: #0056b3;
+  }
+</style>
+
+<!-- Navbar -->
 <div class="w3-bar w3-black w3-large">
   <div class="w3-bar-item w3-left w3-black">Car Dealer Portal: {{user.username}}</div>
   <a class="w3-bar-item w3-btn w3-teal w3-right" href="/car_dealer_portal/logout/">Logout</a>
-  <a class="w3-bar-item w3-btn w3-teal w3-right " href="/car_dealer_portal/auth/">Home</a>
+  <a class="w3-bar-item w3-btn w3-teal w3-right" href="/car_dealer_portal/auth/">Home</a>
   <a class="w3-bar-item w3-btn w3-teal w3-right" href="/car_dealer_portal/order_list/">Orders</a>
   <a class="w3-bar-item w3-btn w3-teal w3-right" href="/car_dealer_portal/manage_vehicles/">Vehicles</a>
   <a class="w3-bar-item w3-btn w3-teal w3-right" href="/car_dealer_portal/history/">Earnings</a>
 </div>
 
+<!-- Message Container -->
 <div class="w3-display-container" style="height:300px;">
   <div class="w3-display-middle">
-    Vehicle Details Added! <br><br>
+    <p>Vehicle Details Added!</p>
     <a href="/car_dealer_portal/index/">Back To Home Page</a>
-</div>
+  </div>
 </div>
 {% endblock %}

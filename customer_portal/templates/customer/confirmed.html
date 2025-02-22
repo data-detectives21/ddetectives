@@ -1,22 +1,140 @@
 {% extends 'customer/base.html' %}
 {% block content %}
+
+<!-- Add a CSS block for vibrant colors, animations, and spacing -->
+<style>
+  /* Vibrant gradient background */
+  body {
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee, #a18cd1);
+    background-size: 400% 400%;
+    animation: gradientBG 10s ease infinite;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Gradient background animation */
+  @keyframes gradientBG {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* Navbar styling */
+  .w3-bar {
+    background-color: #333;
+    animation: slideDown 0.5s ease-out;
+    padding: 10px 0; /* Add padding to the navbar */
+  }
+
+  /* Navbar slide-down animation */
+  @keyframes slideDown {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  /* Button styling and spacing */
+  .w3-btn {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin: 0 10px; /* Add space between buttons */
+  }
+
+  .w3-btn:hover {
+    background-color: #ff6f61 !important; /* Vibrant coral color */
+    transform: scale(1.05);
+  }
+
+  /* Order completion container */
+  .w3-display-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .w3-display-middle {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: fadeIn 1.5s ease-in;
+  }
+
+  /* Fade-in animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Vibrant text colors */
+  h3 {
+    color: #ff6f61; /* Coral color */
+    font-size: 2.5em;
+    margin-bottom: 20px;
+  }
+
+  b {
+    color: #333;
+  }
+
+  /* Highlighted text */
+  .highlight {
+    color: #ff6f61;
+    font-weight: bold;
+  }
+
+  /* Pulse animation for emphasis */
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .pulse {
+    animation: pulse 2s infinite;
+  }
+</style>
+
 <div class="w3-bar w3-large w3-black">
   <div class="w3-bar-item w3-left w3-black">Customer Portal: {{user.username}}</div>
   <a class="w3-bar-item w3-btn w3-teal w3-right" href="/customer_portal/logout/">Logout</a>
   <a class="w3-bar-item w3-btn w3-teal w3-right" href="/customer_portal/manage/">Manage</a>
   <a class="w3-ber-item w3-btn w3-teal w3-right" href="/customer_portal/search/">Search Cars</a>
 </div>
-{% csrf_token %}
 
-<div class="w3-display-container" style="height:400px;">
+<div class="w3-display-container">
   <div class="w3-display-middle">
-<h3><b>Order Completed</b></h3>
-<b>Your Vehicle Order Has Been Processed!</b><br><br>
-<b>Total Rent :</b> ${{order.rent}}<br><br>
-<b>Vehicle :</b> {{order.vehicle.car_name}}<br><br>
-<b>Duration :</b> {{order.days}} days<br><br>
-<b>Car-Dealer :</b> {{order.car_dealer.car_dealer.first_name}} {{order.car_dealer.car_dealer.last_name}}<br><br>
-<b>Car-Dealer's Contact:</b> {{order.car_dealer.mobile}}<br><br>
+    <h3 class="pulse"><b>Order Completed</b></h3>
+    <b>Your Vehicle Order Has Been Processed!</b><br><br>
+    <b>Total Rent :</b> <span class="highlight">${{order.rent}}</span><br><br>
+    <b>Vehicle :</b> <span class="highlight">{{order.vehicle.car_name}}</span><br><br>
+    <b>Duration :</b> <span class="highlight">{{order.days}} days</span><br><br>
+    <b>Car-Dealer :</b> <span class="highlight">{{order.car_dealer.car_dealer.first_name}} {{order.car_dealer.car_dealer.last_name}}</span><br><br>
+    <b>Car-Dealer's Contact:</b> <span class="highlight">{{order.car_dealer.mobile}}</span><br><br>
+  </div>
 </div>
-</div>
+
 {% endblock %}

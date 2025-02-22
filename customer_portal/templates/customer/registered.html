@@ -1,17 +1,72 @@
 {% extends 'car_dealer/base.html' %}
 {% block content %}
 {% csrf_token %}
-<div class="w3-bar w3-black">
-  <div class="w3-bar-item w3-left">Registration Form</div>
-  <a class="w3-bar-item w3-right w3-btn w3-teal" href="/customer_portal/login/">Login</a>
-  <a class="w3-bar-item w3-right w3-btn w3-teal" href="/">Home</a>
+
+<!-- Navigation Bar -->
+<div class="w3-bar w3-black w3-animate-top">
+  <div class="w3-bar-item w3-left">Registration Successful</div>
+  <a class="w3-bar-item w3-right w3-btn w3-teal w3-hover-opacity" href="/customer_portal/login/">Login</a>
+  <a class="w3-bar-item w3-right w3-btn w3-teal w3-hover-opacity" href="/">Home</a>
 </div>
-<div class="w3-center">
-<p class="w3-large">
-Registered Successfully !
-</p>
-<p class="w3-large">
-Now go to the <a class="w3-btn w3-teal" href="/customer_portal/login/">Login Page<a> and Login !
-</p>
+
+<!-- Success Message Section -->
+<div class="w3-display-container" style="height: 100vh; background: #e3f2fd;">
+  <div class="w3-display-middle w3-center">
+    <!-- Animated Checkmark -->
+    <div class="w3-circle w3-padding-large w3-white" style="width: 100px; height: 100px; margin: 0 auto; position: relative; animation: popIn 0.8s ease-in-out;">
+      <svg class="checkmark" viewBox="0 0 52 52" style="width: 60px; height: 60px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" stroke="#64b5f6" stroke-width="3" style="animation: circleAnimation 0.6s ease-in-out;"></circle>
+        <path class="checkmark__check" fill="none" stroke="#64b5f6" stroke-width="4" d="M14.1 27.2l7.1 7.2 16.7-16.8" style="stroke-dasharray: 48; stroke-dashoffset: 48; animation: checkAnimation 0.6s ease-in-out 0.6s forwards;"></path>
+      </svg>
+    </div>
+
+    <!-- Success Message -->
+    <h1 class="w3-text-dark-grey w3-animate-opacity" style="margin-top: 30px; font-size: 2.5em;">Registered Successfully!</h1>
+    <p class="w3-text-dark-grey w3-large w3-animate-opacity" style="margin-top: 20px;">
+      Now go to the <a class="w3-btn w3-teal w3-hover-opacity" href="/customer_portal/login/">Login Page</a> and Login!
+    </p>
+  </div>
 </div>
+
+<!-- Custom CSS for Animations and Styling -->
+<style>
+  /* Smooth hover effect for buttons */
+  .w3-btn {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .w3-btn:hover {
+    transform: scale(1.05);
+  }
+
+  /* Pop-in animation for the checkmark circle */
+  @keyframes popIn {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+  }
+
+  /* Circle animation for the checkmark */
+  @keyframes circleAnimation {
+    0% { stroke-dasharray: 0 157; }
+    100% { stroke-dasharray: 157 157; }
+  }
+
+  /* Checkmark animation */
+  @keyframes checkAnimation {
+    0% { stroke-dashoffset: 48; }
+    100% { stroke-dashoffset: 0; }
+  }
+
+  /* Fade-in animation for text */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .w3-animate-opacity {
+    animation: fadeIn 1s ease-in-out;
+  }
+</style>
+
 {% endblock %}

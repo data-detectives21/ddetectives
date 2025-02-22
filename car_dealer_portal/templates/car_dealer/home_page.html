@@ -2,32 +2,65 @@
 {% block content %}
 {% load static %}
 
-<div class="w3-bar w3-large w3-black">
-  <div class="w3-bar-item w3-left w3-black">Car Dealer Portal: {{user.username}}</div>
-  <a class="w3-bar-item w3-btn w3-teal w3-right" href="/car_dealer_portal/logout/">Logout</a>
-  <a class="w3-bar-item w3-btn w3-teal w3-right" href="/car_dealer_portal/order_list/">Orders</a>
-  <a class="w3-bar-item w3-btn w3-teal w3-right" href="/car_dealer_portal/manage_vehicles/">Vehicles</a>
-  <a class="w3-bar-item w3-btn w3-teal w3-right" href="/car_dealer_portal/history/">Earnings</a>
+<!-- Navigation Bar -->
+<div class="w3-bar w3-large" style="background: #1D3557; color: white; display: flex; align-items: center; justify-content: space-between; padding: 0 20px;">
+  <div class="w3-bar-item" style="font-weight: bold; font-size: 24px;">Car Dealer Portal: {{user.username}}</div>
+  <div style="display: flex; gap: 20px;">
+    <a class="w3-btn" style="background: #457B9D; color: white; font-size: 18px; padding: 10px 20px;" href="/car_dealer_portal/history/">Earnings</a>
+    <a class="w3-btn" style="background: #457B9D; color: white; font-size: 18px; padding: 10px 20px;" href="/car_dealer_portal/manage_vehicles/">Vehicles</a>
+    <a class="w3-btn" style="background: #457B9D; color: white; font-size: 18px; padding: 10px 20px;" href="/car_dealer_portal/order_list/">Orders</a>
+    <a class="w3-btn" style="background: #457B9D; color: white; font-size: 18px; padding: 10px 20px;" href="/car_dealer_portal/logout/">Logout</a>
+  </div>
 </div>
 
-<div class="w3-display-container" style="height:800px;">
-  <div class="w3-display-left" style="padding-left: 200px;">
+<!-- Main Content -->
+<div class="w3-display-container" style="height: 800px; background: #FFD1DC;"> <!-- Pastel Light Pink Background -->
+  <!-- Left Side: Form -->
+  <div class="w3-display-left" style="padding-left: 200px; width: 50%;">
+    <div class="w3-container w3-card" style="background: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); padding: 20px;">
+      <h3 class="w3-center" style="font-size: 28px; color: #1D3557; margin-bottom: 20px;"><b>Post Vehicles</b></h3>
+      <form action="/car_dealer_portal/add_vehicle/" method="post">{% csrf_token %}
+        <label style="font-size: 18px; color: #1D3557;">Car Name:</label>
+        <input class="w3-input" type="text" name="car_name" style="margin-bottom: 20px; padding: 10px; border-radius: 5px; border: 1px solid #A8DADC;"><br>
+        
+        <label style="font-size: 18px; color: #1D3557;">Color:</label>
+        <input class="w3-input" type="text" name="color" style="margin-bottom: 20px; padding: 10px; border-radius: 5px; border: 1px solid #A8DADC;"><br>
+        
+        <label style="font-size: 18px; color: #1D3557;">City:</label>
+        <input class="w3-input" type="text" name="city" style="margin-bottom: 20px; padding: 10px; border-radius: 5px; border: 1px solid #A8DADC;"><br>
+        
+        <label style="font-size: 18px; color: #1D3557;">Pincode:</label>
+        <input class="w3-input" type="text" name="pincode" style="margin-bottom: 20px; padding: 10px; border-radius: 5px; border: 1px solid #A8DADC;"><br>
+        
+        <label style="font-size: 18px; color: #1D3557;">Description:</label>
+        <input class="w3-input" type="text" name="description" style="margin-bottom: 20px; padding: 10px; border-radius: 5px; border: 1px solid #A8DADC;"><br>
+        
+        <label style="font-size: 18px; color: #1D3557;">Capacity (Seats):</label>
+        <input class="w3-input" type="text" name="capacity" style="margin-bottom: 20px; padding: 10px; border-radius: 5px; border: 1px solid #A8DADC;"><br>
+        
+        <input class="w3-btn" type="submit" value="Add Vehicle" style="background: #E63946; color: white; font-size: 18px; padding: 12px 24px; border-radius: 5px; transition: background 0.3s;">
+      </form>
+    </div>
+  </div>
 
-<h3 class="w3-container w3-bar w3-black w3-large" style="padding:8px"><center>Post Vehicles<center></h3>
-
-<form class="w3-container" action="/car_dealer_portal/add_vehicle/" method="post">{% csrf_token %}
-  <lable>Car Name :</lable> <input class="w3-input" type="text" name="car_name"><br><br>
-  <lable>Color :</lable> <input class="w3-input" type="text" name="color"><br><br>
-  <lable>City :</lable> <input class="w3-input" type="text" name="city"><br><br>
-  <lable>Pincode :</lable> <input class="w3-input" type="text" name="pincode"><br><br>
-  <lable>Description :</lable> <input class="w3-input" type="text" name="description"><br><br>
-  <lable>Capacity (Seats) :</lable> <input class="w3-input" type="text" name="capacity"><br><br>
-  <input class="w3-btn w3-green" type="submit" value="Add Vehicle"><br><br>
-<form>
+  <!-- Right Side: Image -->
+  <div class="w3-display-right" style="width: 50%;">
+    <img src="{% static 'images/car.jpg' %}" style="width: 100%; height: 800px; object-fit: cover;">
+  </div>
 </div>
 
-<div class = "w3-display-right">
-  <img src="{% static "images/car.jpg" %}" width="750px">
-</div>
+<!-- Animations -->
+<style>
+  .w3-btn:hover {
+    background: #FF1493 !important;
+    transform: scale(1.05);
+    transition: transform 0.3s;
+  }
+
+  .w3-input:focus {
+    border: 1px solid #457B9D !important;
+    box-shadow: 0 0 5px rgba(69, 123, 157, 0.5);
+  }
+</style>
 
 {% endblock %}

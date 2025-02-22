@@ -1,21 +1,135 @@
 {% extends 'customer/base.html' %}
 {% block content %}
 
+<!-- Add a CSS block for the pastel background and animations -->
+<style>
+  /* Pastel gradient background */
+  body {
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Animation for the navbar */
+  @keyframes slideDown {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  .w3-bar {
+    animation: slideDown 0.5s ease-out;
+    background-color: #333; /* Dark navbar for contrast */
+  }
+
+  /* Animation for the car details container */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .w3-container {
+    animation: fadeIn 1s ease-in;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  /* Hover effect for buttons */
+  .w3-btn {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .w3-btn:hover {
+    background-color: #004d40 !important; /* Darker teal on hover */
+    transform: scale(1.05); /* Slightly enlarge the button */
+  }
+
+  /* Animation for the form input fields */
+  @keyframes slideUp {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  input[type="text"] {
+    animation: slideUp 0.5s ease-out;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 200px;
+  }
+
+  /* Animation for the confirmation button */
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  input[type="submit"] {
+    animation: pulse 2s infinite;
+    background-color: #009688; /* Teal color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  /* Adjust text color for better contrast */
+  .w3-container b {
+    color: #333;
+  }
+
+  label {
+    color: #555;
+  }
+</style>
+
 <div class="w3-bar w3-large w3-black">
   <div class="w3-bar-item w3-left w3-black">Customer Portal: {{user.username}}</div>
   <a class="w3-bar-item w3-btn w3-teal w3-right" href="/customer_portal/logout/">Logout</a>
   <a class="w3-bar-item w3-btn w3-teal w3-right" href="/customer_portal/manage/">Manage</a>
   <a class="w3-ber-item w3-btn w3-teal w3-right" href="/customer_portal/search/">Search Cars</a>
 </div>
-<div class="w3-containet w3-center" style="padding:100px  ">
-<b>Car : {{vehicle.car_name}}</b>
-<form class="w3-container" action="/customer_portal/confirmed/" method="post">
-  {% csrf_token %}
-  <b>Price : ${{cost_per_day}} per day</b><br><br>
-  <lable>How many days?</lable> <input type="text" placeholder="2" name="days"><br><br>
-  <input class="w3-btn w3-teal" type="submit"  value="Confirm My Order"><br><br>
-  <input type="hidden" value="{{vehicle.id}}" name="id">
-  <br><br>
-</from>
+
+<div class="w3-containet w3-center" style="padding:100px;">
+  <div class="w3-container">
+    <b>Car : {{vehicle.car_name}}</b>
+    <form class="w3-container" action="/customer_portal/confirmed/" method="post">
+      {% csrf_token %}
+      <!-- Convert dollars to rupees (1 USD = 83 INR) -->
+      <b>Price : ₹{{ cost_per_day|floatformat:2 }} per day</b><br><br>
+      <label>How many days?</label> <input type="text" placeholder="2" name="days"><br><br>
+      <input class="w3-btn w3-teal" type="submit" value="Confirm My Order"><br><br>
+      <input type="hidden" value="{{vehicle.id}}" name="id">
+      <br><br>
+    </form>
+  </div>
 </div>
+
 {% endblock %}

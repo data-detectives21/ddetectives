@@ -1,18 +1,35 @@
 {% extends 'car_dealer/base.html' %}
-
 {% block content %}
-
-<div class="w3-display-container" style="height:500px;">
-  <div class="w3-display-middle">
-      <form class = "w3-container" action="/car_dealer_portal/auth/" method="POST">{% csrf_token %}
-        <lable>Username</lable>  <input class="w3-input" type="text" name="username"><br><br>
-        <lable>Password</lable>  <input class="w3-input" type="password" name="password"><br><br>
-        <input class="w3-btn w3-green" type="submit" value="Login">
-      </form><br><br>
-      <div class="w3-container">
-        <a class="w3-btn w3-red" href="/car_dealer_portal/register/">Register as Dealer</a>
-        <a class="w3-btn w3-teal" href="/">Home</a>
-      </div>
+<div style="background: #FFD1DC; min-height: 100vh; display: flex; justify-content: center; align-items: center;">
+  <div class="w3-card" style="background: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); padding: 40px; width: 400px;">
+    <h2 class="w3-center" style="font-size: 32px; color: #1D3557; margin-bottom: 20px;">Login</h2>
+    <form class="w3-container" action="/car_dealer_portal/auth/" method="POST">{% csrf_token %}
+      <label style="font-size: 18px; color: #1D3557;">Username:</label>
+      <input class="w3-input" type="text" name="username" style="margin-bottom: 20px; padding: 10px; border-radius: 5px; border: 1px solid #A8DADC;"><br>
+      
+      <label style="font-size: 18px; color: #1D3557;">Password:</label>
+      <input class="w3-input" type="password" name="password" style="margin-bottom: 20px; padding: 10px; border-radius: 5px; border: 1px solid #A8DADC;"><br>
+      
+      <input class="w3-btn" type="submit" value="Login" style="background: #E63946; color: white; font-size: 18px; padding: 12px 24px; border-radius: 5px; width: 100%; transition: background 0.3s;">
+    </form>
+    <br>
+    <div class="w3-container" style="text-align: center;">
+      <a class="w3-btn" href="/car_dealer_portal/register/" style="background: #457B9D; color: white; font-size: 18px; padding: 12px 24px; border-radius: 5px; margin-right: 10px; transition: background 0.3s;">Register as Dealer</a>
+      <a class="w3-btn" href="/" style="background: #1D3557; color: white; font-size: 18px; padding: 12px 24px; border-radius: 5px; transition: background 0.3s;">Home</a>
+    </div>
   </div>
 </div>
+
+<!-- Animations -->
+<style>
+  .w3-btn:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s;
+  }
+
+  .w3-input:focus {
+    border: 1px solid #457B9D !important;
+    box-shadow: 0 0 5px rgba(69, 123, 157, 0.5);
+  }
+</style>
 {% endblock %}

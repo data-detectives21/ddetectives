@@ -1,4 +1,10 @@
-{% extends 'car_dealer/base.html'%}
+{% extends 'car_dealer/base.html' %}
 {% block content %}
-<center><h4>SORRY, <br> Wrong credentials! <br> Go back to <a href="/car_dealer_portal/login/">Login Page</a></h4></center>
+<div style="background: #FFD1DC; min-height: 100vh; display: flex; justify-content: center; align-items: center;">
+  <div class="w3-card" style="background: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); padding: 40px; text-align: center;">
+    <h2 style="font-size: 32px; color: #1D3557; margin-bottom: 20px;">Sorry!</h2>
+    <p style="font-size: 24px; color: #1D3557; margin-bottom: 20px;">Wrong credentials. Please try again.</p>
+    <a href="/car_dealer_portal/login/" class="w3-btn" style="background: #E63946; color: white; font-size: 20px; padding: 12px 24px; border-radius: 5px; text-decoration: none;">Go to Login Page</a>
+  </div>
+</div>
 {% endblock %}

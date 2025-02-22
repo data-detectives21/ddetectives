@@ -1,17 +1,131 @@
 {% load static %}
 <html>
 <head>
-  <title>Car Rental System</title>
+  <title>RevRent - Car Rental System</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="{% static 'css/w3.css' %}">
+  <!-- Custom CSS for animations and styling -->
+  <style>
+    /* Pastel gradient background */
+    body {
+      background: linear-gradient(135deg, #FFD1DC, #B2EBF2, #FFCC99);
+      background-size: 200% 200%;
+      animation: gradientBackground 10s ease infinite;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Gradient background animation */
+    @keyframes gradientBackground {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Logo styling */
+    .logo {
+      position: fixed;
+      top: 20px; /* Position at the top */
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 48px;
+      font-weight: bold;
+      color: #007BFF;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      z-index: 2;
+    }
+
+    /* Header styling */
+    .w3-container.w3-teal {
+      background-color: rgba(255, 255, 255, 0.8) !important; /* Semi-transparent white background */
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 1;
+      margin-top: 120px; /* 5 lines below the logo (48px logo + 72px spacing) */
+    }
+
+    .w3-container.w3-teal h1 {
+      font-size: 36px;
+      font-weight: bold;
+      color: #333;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 2s ease;
+    }
+
+    /* Fade-in animation for the title */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Main content container */
+    .main-content {
+      background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 1200px;
+      animation: slideIn 1s ease;
+      position: relative;
+      z-index: 1;
+      margin-top: 140px; /* Adjusted to ensure it's below the header */
+    }
+
+    /* Slide-in animation for the main content */
+    @keyframes slideIn {
+      from { transform: translateY(-20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Button styling */
+    .w3-btn {
+      border-radius: 4px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .w3-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Footer styling */
+    footer {
+      background-color: rgba(255, 255, 255, 0.8);
+      color: #333;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+      z-index: 2;
+    }
+  </style>
 </head>
 <body>
+  <!-- Logo -->
+  {% if user.is_authenticated %}
+  <div class="logo">RevRent</div>
+  {% endif %}
+
+  <!-- Header -->
   <div class="w3-container w3-teal">
-    <h1 class="w3-center">Online Car Rental System<h1>
+    <h1 class="w3-center">RevRent - Online Car Rental System</h1>
   </div>
 
-  {% block content %}
-  {% endblock %}
-  
+  <!-- Main Content -->
+  <div class="main-content">
+    {% block content %}
+    {% endblock %}
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2023 RevRent. All rights reserved.
+  </footer>
 </body>
 </html>

@@ -1,48 +1,107 @@
 {% extends 'customer/base.html' %}
 {% block content %}
 
-<div class="w3-bar w3-large w3-black">
+<!-- Navigation Bar -->
+<div class="w3-bar w3-large w3-black w3-animate-top">
   <div class="w3-bar-item w3-left w3-black">Customer Portal: {{user.username}}</div>
-  <a class="w3-bar-item w3-btn w3-teal w3-right" href="/customer_portal/logout/">Logout</a>
-  <a class="w3-bar-item w3-btn w3-teal w3-right" href="/customer_portal/manage/">Manage</a>
-  <a class="w3-ber-item w3-btn w3-teal w3-right" href="/customer_portal/search/">Search Cars</a>
+  <a class="w3-bar-item w3-btn w3-pink w3-right w3-hover-opacity" href="/customer_portal/logout/">Logout</a>
+  <a class="w3-bar-item w3-btn w3-pink w3-right w3-hover-opacity" href="/customer_portal/manage/">Manage</a>
+  <a class="w3-bar-item w3-btn w3-pink w3-right w3-hover-opacity" href="/customer_portal/search/">Search Cars</a>
 </div>
 
-<h3 class="w3-center" style="padding-top:30"><b>Search Results</b></h3>
+<!-- Page Heading -->
+<h3 class="w3-center w3-padding-32 w3-text-pink"><b>Search Results</b></h3>
 
-<div class="w3-center" style="padding:50px;">
-<table class="w3-table w3-striped w3-center w3-large">
-  
-
-    <tr>
-      <th style="padding:20">Vehicle </th>
-      <th style="padding:20">Color  </th>
-      <th style="padding:20">Capacity </th>
-      <th style="padding:20">Description </th>
-      <th style="padding:20">Pincode </th>
-      <th style="padding:20">
-      </th style="padding:20">
-    </tr>
-    {% for vehicle in request.session.vehicles_list %}
-    <tr>
-      <td>{{vehicle.name}}</td>
-      <td>{{vehicle.color}}</td>
-      <td>{{vehicle.capacity}}</td>
-      <td>{{vehicle.description}}</td>
-      <td>{{vehicle.pincode}}</td>
-      <td><form action = "/customer_portal/rent/" method="post">
-        {% csrf_token %}
-        <input type="hidden" name="id" value="{{vehicle.id}}">
-        <input class="w3-btn w3-green" type="submit" value="Rent">
-        </form></td>
-    </tr>
-
-  {% endfor %}
-  
-  
-  
-</table>
+<!-- Search Results Table -->
+<div class="w3-container w3-center w3-padding-64" style="background: #ffeff3;">
+  <table class="w3-table w3-striped w3-centered w3-large w3-card-4 w3-hoverable">
+    <thead>
+      <tr class="w3-pink">
+        <th style="padding:20px;">Vehicle</th>
+        <th style="padding:20px;">Color</th>
+        <th style="padding:20px;">Capacity</th>
+        <th style="padding:20px;">Description</th>
+        <th style="padding:20px;">Pincode</th>
+        <th style="padding:20px;">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for vehicle in request.session.vehicles_list %}
+      <tr class="w3-animate-opacity">
+        <td>{{vehicle.name}}</td>
+        <td>{{vehicle.color}}</td>
+        <td>{{vehicle.capacity}}</td>
+        <td>{{vehicle.description}}</td>
+        <td>{{vehicle.pincode}}</td>
+        <td>
+          <form action="/customer_portal/rent/" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{vehicle.id}}">
+            <button class="w3-btn w3-pink w3-round-large w3-hover-opacity" type="submit">Rent</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
+
+<!-- Custom CSS for Animations and Styling -->
+<style>
+  /* Smooth hover effect for buttons */
+  .w3-btn {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .w3-btn:hover {
+    transform: scale(1.05);
+  }
+
+  /* Fade-in animation for table rows */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .w3-animate-opacity {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  /* Hover effect for table rows */
+  .w3-hoverable tbody tr:hover {
+    background-color: #f8bbd0;
+    transition: background-color 0.3s ease;
+  }
+
+  /* Custom styling for the table */
+  .w3-table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .w3-table th {
+    background-color: #e91e63;
+    color: white;
+    font-weight: bold;
+  }
+
+  .w3-table td, .w3-table th {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+  }
+
+  /* Custom styling for the Rent button */
+  .w3-pink {
+    background-color: #e91e63;
+    color: white;
+  }
+
+  .w3-pink:hover {
+    background-color: #c2185b;
+  }
+</style>
+
 {% endblock %}
-
-

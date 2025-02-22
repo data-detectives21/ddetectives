@@ -1,42 +1,144 @@
 {% extends 'car_dealer/base.html' %}
 {% block content %}
+<!-- Custom CSS for animations and styling -->
+<style>
+  /* Pastel blue gradient background */
+  body {
+    background: linear-gradient(135deg, #B2EBF2, #E0F7FA, #80DEEA);
+    background-size: 200% 200%;
+    animation: gradientBackground 10s ease infinite;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Gradient background animation */
+  @keyframes gradientBackground {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Navbar styling */
+  .w3-bar {
+    background-color: rgba(0, 123, 255, 0.9) !important; /* Semi-transparent blue */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    animation: slideDown 0.5s ease;
+  }
+
+  .w3-bar-item {
+    color: white !important;
+    transition: background-color 0.3s ease;
+  }
+
+  .w3-bar-item:hover {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+  }
+
+  /* Slide-down animation for navbar */
+  @keyframes slideDown {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  /* Heading styling */
+  h3.w3-center {
+    color: #007BFF;
+    font-size: 28px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease;
+  }
+
+  /* Fade-in animation for heading */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* Table styling */
+  .w3-table {
+    border-collapse: collapse;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: slideIn 0.5s ease;
+  }
+
+  .w3-table th, .w3-table td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .w3-table th {
+    background-color: #007BFF;
+    color: white;
+    font-weight: bold;
+  }
+
+  .w3-table tr:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+    transition: background-color 0.3s ease;
+  }
+
+  /* Slide-in animation for table */
+  @keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  /* Button styling */
+  .w3-btn {
+    border-radius: 4px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .w3-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+</style>
+
+<!-- Navbar -->
 <div class="w3-bar w3-black w3-large">
   <div class="w3-bar-item w3-left w3-black">Car Dealer Portal: {{user.username}}</div>
   <a class="w3-bar-item w3-btn w3-teal w3-right" href="/car_dealer_portal/logout/">Logout</a>
-  <a class="w3-bar-item w3-btn w3-teal w3-right " href="/car_dealer_portal/auth/">Home</a>
+  <a class="w3-bar-item w3-btn w3-teal w3-right" href="/car_dealer_portal/auth/">Home</a>
   <a class="w3-bar-item w3-btn w3-teal w3-right" href="/car_dealer_portal/order_list/">Orders</a>
   <a class="w3-bar-item w3-btn w3-teal w3-right" href="/car_dealer_portal/manage_vehicles/">Vehicles</a>
   <a class="w3-bar-item w3-btn w3-teal w3-right" href="/car_dealer_portal/history/">Earnings</a>
 </div>
+
+<!-- Main Content -->
 <h3 class="w3-center" style="padding-top:30"><b>Vehicle's Order List</b></h3>
 <div style="padding:18">
-<table class="w3-table w3-striped w3-center">
-
-
-  <tr>
-    <th style="padding:20">Name </th>
-    <th style="padding:20">Color</th>
-    <th style="padding:20">Rental Amount </th>
-    <th style="padding:20">Days </th>
-    <th style="padding:20">Action
-    </th>
-  </tr>
-
-  {% for order in order_list %}
-
-  <tr>
-    <td>{{order.vehicle.car_name}}</td>
-    <td>{{order.vehicle.color}}</td>
-    <td>${{order.rent}}</td>
-    <td>{{order.days}}</td>
-    <td><form action = "/car_dealer_portal/complete/" method="post">
-      {% csrf_token %}
-      <input type="hidden" name="id" value="{{order.id}}">
-      <input class="w3-btn w3-indigo" type="submit" value="Complete">
-    </form></td>
-  </tr>
-
-{% endfor %}
-</table>
+  <table class="w3-table w3-striped w3-center">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Color</th>
+        <th>Rental Amount</th>
+        <th>Days</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for order in order_list %}
+      <tr>
+        <td>{{order.vehicle.car_name}}</td>
+        <td>{{order.vehicle.color}}</td>
+        <td>${{order.rent}}</td>
+        <td>{{order.days}}</td>
+        <td>
+          <form action="/car_dealer_portal/complete/" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{order.id}}">
+            <input class="w3-btn w3-indigo" type="submit" value="Complete">
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
 {% endblock %}

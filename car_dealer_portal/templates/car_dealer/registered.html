@@ -1,17 +1,88 @@
 {% extends 'car_dealer/base.html' %}
 {% block content %}
-{% csrf_token %}
+<!-- Custom CSS for animations and styling -->
+<style>
+  /* Pastel blue gradient background */
+  body {
+    background: linear-gradient(135deg, #B2EBF2, #E0F7FA, #80DEEA);
+    background-size: 200% 200%;
+    animation: gradientBackground 10s ease infinite;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Gradient background animation */
+  @keyframes gradientBackground {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Navbar styling */
+  .w3-bar {
+    background-color: rgba(0, 123, 255, 0.9) !important; /* Semi-transparent blue */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+  }
+
+  .w3-bar-item {
+    color: white !important;
+    transition: background-color 0.3s ease;
+  }
+
+  .w3-bar-item:hover {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+  }
+
+  /* Main content styling */
+  .w3-center {
+    margin-top: 100px; /* Space below the navbar */
+    text-align: center;
+  }
+
+  .w3-large {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease;
+  }
+
+  /* Fade-in animation for text */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Button styling */
+  .w3-btn {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .w3-btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+</style>
+
+<!-- Navbar -->
 <div class="w3-bar w3-black">
   <div class="w3-bar-item w3-left">Registration Form</div>
-  <a class="w3-bar-item w3-right w3-btn w3-teal" href="/car_dealer_portal/login/">Login</a>
-  <a class="w3-bar-item w3-right w3-btn w3-teal" href="/">Home</a>
 </div>
+
+<!-- Main Content -->
 <div class="w3-center">
-<p class="w3-large">
-Registered Successfully !
-</p>
-<p class="w3-large">
-Now go to the <a class="w3-btn w3-teal" href="/car_dealer_portal/login/">Login Page<a> and login !
-</p>
+  <p class="w3-large">
+    Registered Successfully!
+  </p>
+  <p class="w3-large">
+    Now go to the <a class="w3-btn w3-teal" href="/car_dealer_portal/login/">Login Page</a> and login!
+  </p>
 </div>
 {% endblock %}

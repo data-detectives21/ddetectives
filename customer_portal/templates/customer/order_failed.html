@@ -1,11 +1,78 @@
 {% extends 'customer/base.html' %}
 {% block content %}
 
-<div class="w3-bar w3-large w3-black">
+<!-- Navigation Bar -->
+<div class="w3-bar w3-large w3-black w3-animate-top">
   <div class="w3-bar-item w3-left w3-black">Customer Portal: {{user.username}}</div>
-  <a class="w3-bar-item w3-btn w3-teal w3-right" href="/customer_portal/logout/">Logout</a>
-  <a class="w3-bar-item w3-btn w3-teal w3-right" href="/customer_portal/manage/">Manage</a>
-  <a class="w3-ber-item w3-btn w3-teal w3-right" href="/customer_portal/search/">Search cars</a>
+  <a class="w3-bar-item w3-btn w3-teal w3-right w3-hover-opacity" href="/customer_portal/logout/">Logout</a>
+  <a class="w3-bar-item w3-btn w3-teal w3-right w3-hover-opacity" href="/customer_portal/manage/">Manage</a>
+  <a class="w3-bar-item w3-btn w3-teal w3-right w3-hover-opacity" href="/customer_portal/search/">Search cars</a>
 </div>
-<div class="w3-container w3-center" style="padding:60px;">
+
+<!-- Main Content -->
+<div class="w3-container w3-center w3-animate-opacity" style="padding:60px;">
+  <h1 class="w3-text-teal w3-animate-zoom">Welcome to the Customer Portal</h1>
+  <p class="w3-text-white w3-animate-fading">Manage your account and search for cars with ease.</p>
+</div>
+
+<!-- Vibrant Background with CSS -->
+<style>
+  /* Vibrant Animated Gradient Background */
+  body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(270deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee, #84fab0);
+    background-size: 400% 400%;
+    animation: GradientBackground 15s ease infinite;
+  }
+
+  /* Keyframes for Gradient Animation */
+  @keyframes GradientBackground {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Smooth transitions for buttons */
+  .w3-btn {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  /* Slight scale effect on hover */
+  .w3-btn:hover {
+    transform: scale(1.05);
+  }
+
+  /* Fade-in animation for main content */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .w3-animate-opacity {
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  /* Zoom-in animation for heading */
+  @keyframes zoomIn {
+    from { transform: scale(0.9); }
+    to { transform: scale(1); }
+  }
+
+  .w3-animate-zoom {
+    animation: zoomIn 0.5s ease-in-out;
+  }
+
+  /* Fading animation for paragraph */
+  @keyframes fadeInOut {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  .w3-animate-fading {
+    animation: fadeInOut 3s infinite;
+  }
+</style>
+
 {% endblock %}

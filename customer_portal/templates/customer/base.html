@@ -4,14 +4,109 @@
   <title>Car Rental System</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="{% static 'css/w3.css' %}">
+  <!-- Custom CSS for animations and styling -->
+  <style>
+    /* Vibrant gradient background */
+    body {
+      background: linear-gradient(135deg, #FF6F61, #FFD166, #06D6A0, #118AB2);
+      background-size: 200% 200%;
+      animation: gradientBackground 10s ease infinite;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Gradient background animation */
+    @keyframes gradientBackground {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Header styling */
+    .w3-container.w3-teal {
+      background-color: rgba(0, 123, 255, 0.9) !important; /* Semi-transparent blue */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      animation: slideDown 0.5s ease;
+    }
+
+    .w3-container.w3-teal h1 {
+      font-size: 36px;
+      font-weight: bold;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      animation: fadeIn 2s ease;
+    }
+
+    /* Fade-in animation for heading */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Slide-down animation for header */
+    @keyframes slideDown {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Main content container */
+    .main-content {
+      background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      margin: 50px auto;
+      padding: 30px;
+      max-width: 1200px;
+      animation: fadeIn 1s ease;
+    }
+
+    /* Fade-in animation for main content */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Button styling */
+    .w3-btn {
+      border-radius: 4px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .w3-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Footer styling */
+    footer {
+      background-color: rgba(0, 123, 255, 0.9);
+      color: white;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
+    }
+  </style>
 </head>
 <body>
+  <!-- Header -->
   <div class="w3-container w3-teal">
-    <h1 class="w3-center">Car Rental System<h1>
+    <h1 class="w3-center">Car Rental System</h1>
   </div>
 
-  {% block content %}
-  {% endblock %}
+  <!-- Main Content -->
+  <div class="main-content">
+    {% block content %}
+    {% endblock %}
+  </div>
 
+  <!-- Footer -->
+  <footer>
+    &copy; 2023 Car Rental System. All rights reserved.
+  </footer>
 </body>
 </html>

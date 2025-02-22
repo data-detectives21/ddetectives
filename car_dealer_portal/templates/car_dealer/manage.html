@@ -1,39 +1,70 @@
 {% extends 'car_dealer/base.html' %}
 {% block content %}
-<div class="w3-bar w3-black w3-large">
-  <div class="w3-bar-item w3-left w3-black">Car Dealer Portal: {{user.username}}</div>
-  <a class="w3-bar-item w3-btn w3-teal w3-right" href="/car_dealer_portal/logout/">Logout</a>
-  <a class="w3-bar-item w3-btn w3-teal w3-right " href="/car_dealer_portal/auth/">Home</a>
-  <a class="w3-bar-item w3-btn w3-teal w3-right" href="/car_dealer_portal/order_list/">Orders</a>
-  <a class="w3-bar-item w3-btn w3-teal w3-right" href="/car_dealer_portal/manage_vehicles/">Vehicles</a>
-  <a class="w3-bar-item w3-btn w3-teal w3-right" href="/car_dealer_portal/history/">Earnings</a>
+<!-- Navigation Bar -->
+<div class="w3-bar w3-large" style="background: #1D3557; color: white; display: flex; align-items: center; justify-content: space-between; padding: 0 20px;">
+  <div class="w3-bar-item" style="font-weight: bold; font-size: 24px;">Car Dealer Portal: {{user.username}}</div>
+  <div style="display: flex; gap: 20px;">
+    <a class="w3-btn" style="background: #457B9D; color: white; font-size: 18px; padding: 10px 20px;" href="/car_dealer_portal/history/">Earnings</a>
+    <a class="w3-btn" style="background: #457B9D; color: white; font-size: 18px; padding: 10px 20px;" href="/car_dealer_portal/manage_vehicles/">Vehicles</a>
+    <a class="w3-btn" style="background: #457B9D; color: white; font-size: 18px; padding: 10px 20px;" href="/car_dealer_portal/order_list/">Orders</a>
+    <a class="w3-btn" style="background: #457B9D; color: white; font-size: 18px; padding: 10px 20px;" href="/car_dealer_portal/auth/">Home</a>
+    <a class="w3-btn" style="background: #457B9D; color: white; font-size: 18px; padding: 10px 20px;" href="/car_dealer_portal/logout/">Logout</a>
+  </div>
 </div>
-<h3 class="w3-center" style="padding-top:30"><b>Posted Vehicles</b></h3>
-<div style="padding:18">
-<table class="w3-table w3-striped w3-center">
 
-  <tr>
-    <th style="padding:20;">Car </th>
-    <th style="padding:20;">Color </th>
-    <th style="padding:20;">Capacity </th>
-    <th style="padding:20;">Pincode </th>
-    <th style="padding:20;">Address</th>
-    <th style="padding:20;">Action</th>
-  </tr>
+<!-- Page Heading -->
+<h3 class="w3-center" style="padding-top: 30px; color: #1D3557; font-size: 32px; animation: fadeIn 2s ease-in-out;"><b>Posted Vehicles</b></h3>
+
+<!-- Vehicle Cards -->
+<div style="padding: 18px; max-width: 800px; margin: 0 auto;">
   {% for vehicle in vehicle_list %}
-  <tr>
-      <td>{{vehicle.car_name}}</td>
-      <td>{{vehicle.color}}</td>
-      <td>{{vehicle.capacity}} Seats</td>
-      <td>{{vehicle.area.pincode}}</td>
-      <td>{{vehicle.area.city}}</td>
-      <td><form action = "/car_dealer_portal/delete/" method="post">
-        {% csrf_token %}
-        <input type="hidden" name="id" value="{{vehicle.id}}">
-        <input class="w3-btn w3-red" type="submit" value="Delete">
-      </form></td>
-  </tr>
-{% endfor %}
-</table>
+  <div class="w3-card" style="background: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); padding: 20px; margin-bottom: 20px; animation: slideIn 1s ease-in-out;">
+    <div style="font-size: 24px; font-weight: bold; color: #1D3557; margin-bottom: 10px;">{{vehicle.car_name}}</div>
+    <div style="font-size: 18px; color: #1D3557; margin-bottom: 10px;"><b>Color:</b> {{vehicle.color}}</div>
+    <div style="font-size: 18px; color: #1D3557; margin-bottom: 10px;"><b>Capacity:</b> {{vehicle.capacity}} Seats</div>
+    <div style="font-size: 18px; color: #1D3557; margin-bottom: 10px;"><b>Pincode:</b> {{vehicle.area.pincode}}</div>
+    <div style="font-size: 18px; color: #1D3557; margin-bottom: 10px;"><b>City:</b> {{vehicle.area.city}}</div>
+    <form action="/car_dealer_portal/delete/" method="post" style="margin-top: 10px;">
+      {% csrf_token %}
+      <input type="hidden" name="id" value="{{vehicle.id}}">
+      <input class="w3-btn" type="submit" value="Delete" style="background: #E63946; color: white; font-size: 16px; padding: 8px 16px; border-radius: 5px; transition: background 0.3s;">
+    </form>
+  </div>
+  {% endfor %}
 </div>
+
+<!-- Animations -->
+<style>
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .w3-btn:hover {
+    background: #FF1493 !important;
+    transform: scale(1.05);
+    transition: transform 0.3s;
+  }
+
+  .w3-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  }
+</style>
+
 {% endblock %}

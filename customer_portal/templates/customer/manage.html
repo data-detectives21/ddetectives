@@ -1,48 +1,170 @@
 {% extends 'customer/base.html' %}
 {% block content %}
+
+<!-- Add a CSS block for animations and professional design -->
+<style>
+  /* Vibrant gradient background */
+  body {
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    background-size: 400% 400%;
+    animation: gradientBG 10s ease infinite;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Gradient background animation */
+  @keyframes gradientBG {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* Navbar styling */
+  .w3-bar {
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
+    animation: slideDown 0.5s ease-out;
+    padding: 10px 0;
+  }
+
+  /* Navbar slide-down animation */
+  @keyframes slideDown {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  /* Button styling */
+  .w3-btn {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border-radius: 25px; /* Rounded buttons */
+    margin: 5px;
+  }
+
+  .w3-btn:hover {
+    transform: scale(1.05);
+  }
+
+  /* Order card styling */
+  .order-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+    width: 100%;
+    animation: fadeIn 1s ease-in;
+  }
+
+  /* Fade-in animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Order details styling */
+  .order-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .order-details b {
+    color: #009688; /* Teal color */
+  }
+
+  /* Action button styling */
+  .action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+  }
+
+  /* Pulse animation for buttons */
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .pulse {
+    animation: pulse 2s infinite;
+  }
+
+  /* Shake animation for delete button */
+  @keyframes shake {
+    0% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-5px);
+    }
+    50% {
+      transform: translateX(5px);
+    }
+    75% {
+      transform: translateX(-5px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  .w3-btn.w3-red:hover {
+    animation: shake 0.5s ease-in-out;
+  }
+</style>
+
 <div class="w3-bar w3-large w3-black">
   <div class="w3-bar-item w3-left w3-black">Customer Portal: {{user.username}}</div>
   <a class="w3-bar-item w3-btn w3-teal w3-right" href="/customer_portal/logout/">Logout</a>
-  <a class="w3-ber-item w3-btn w3-teal w3-right" href="/customer_portal/search/">Search Cars</a>
+  <a class="w3-bar-item w3-btn w3-teal w3-right" href="/customer_portal/search/">Search Cars</a>
 </div>
-<h3 class="w3-center" style="padding-top:20"><b>Your Orders</b></h3>
-<div class="w3-center" style="padding:50px;">
-<table class="w3-table w3-striped w3-center">
 
-
-  <tr>
-    <th>Car</th>
-    <th>Days</th>
-    <th>Rent</th>
-    <th>Capacity</th>
-    <th>Description</th>
-    <th>Pincode</th>
-    <th>Action</th>
-  </tr>
+<h3 class="w3-center" style="padding-top:20px;"><b>Your Orders</b></h3>
+<div class="w3-center" style="padding:20px;">
   {% for order in od %}
-  <tr>
-    <td>{{order.vehicle.car_name}}</td>
-    <td>{{order.days}}</td>
-    <td>${{order.rent}}</td>
-    <td>{{order.vehicle.capacity}} Seats</td>
-    <td>{{order.vehicle.description}}</td>
-    <td>{{order.vehicle.area.pincode}}</td>
-    <td>
-      <form action = "/customer_portal/delete/" method="post">
-      {% csrf_token %}
-      <input type="hidden" name="id" value="{{order.id}}">
-      <input class="w3-btn w3-red" type="submit" value="Delete">
-    </form>
-<!--   
-    <form action = "/customer_portal/update/" method="post">
-      {% csrf_token %}
-      <input type="hidden" name="id" value="{{order.id}}">
-      <input class="w3-btn w3-indigo" type="submit" value="Update">
-    </form> -->
-  </td>
-  </tr>
-
-{% endfor %}
-</table>
+  <div class="order-card">
+    <div class="order-details">
+      <div><b>Car:</b> {{order.vehicle.car_name}}</div>
+      <div><b>Days:</b> {{order.days}}</div>
+      <div><b>Rent:</b> ${{order.rent}}</div>
+      <div><b>Capacity:</b> {{order.vehicle.capacity}} Seats</div>
+      <div><b>Description:</b> {{order.vehicle.description}}</div>
+      <div><b>Pincode:</b> {{order.vehicle.area.pincode}}</div>
+    </div>
+    <div class="action-buttons">
+      <form action="/customer_portal/delete/" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="id" value="{{order.id}}">
+        <input class="w3-btn w3-red pulse" type="submit" value="Delete">
+      </form>
+    </div>
+  </div>
+  {% endfor %}
 </div>
+
 {% endblock %}

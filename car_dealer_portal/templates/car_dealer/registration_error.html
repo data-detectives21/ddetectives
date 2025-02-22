@@ -1,4 +1,75 @@
-{% extends 'car_dealer/base.html'%}
+{% extends 'car_dealer/base.html' %}
 {% block content %}
-<p>username already exists, try using a different username. <a href="/car_dealer_portal/login/">login page</a></p>
+<!-- Custom CSS for animations and styling -->
+<style>
+  /* Pastel blue gradient background */
+  body {
+    background: linear-gradient(135deg, #B2EBF2, #E0F7FA, #80DEEA);
+    background-size: 200% 200%;
+    animation: gradientBackground 10s ease infinite;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+  }
+
+  /* Gradient background animation */
+  @keyframes gradientBackground {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Message container styling */
+  .message-container {
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    max-width: 400px;
+    text-align: center;
+    animation: fadeIn 1s ease, float 4s ease-in-out infinite;
+  }
+
+  /* Fade-in animation for message */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Floating animation for message */
+  @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+  }
+
+  /* Text styling */
+  .message-container p {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  /* Link styling */
+  .message-container a {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+
+  .message-container a:hover {
+    color: #0056b3;
+  }
+</style>
+
+<!-- Message Container -->
+<div class="message-container">
+  <p>Username already exists, try using a different username.</p>
+  <p>Go back to the <a href="/car_dealer_portal/login/">login page</a>.</p>
+</div>
 {% endblock %}

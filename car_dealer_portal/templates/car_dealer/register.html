@@ -1,27 +1,136 @@
 {% extends 'car_dealer/base.html' %}
 {% block content %}
+<!-- Custom CSS for spacing and styling -->
+<style>
+  /* Pastel blue gradient background */
+  body {
+    background: linear-gradient(135deg, #B2EBF2, #E0F7FA, #80DEEA);
+    background-size: 200% 200%;
+    animation: gradientBackground 10s ease infinite;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Gradient background animation */
+  @keyframes gradientBackground {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Navbar styling */
+  .w3-bar {
+    background-color: rgba(0, 123, 255, 0.9) !important; /* Semi-transparent blue */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+  }
+
+  .w3-bar-item {
+    color: white !important;
+    transition: background-color 0.3s ease;
+  }
+
+  .w3-bar-item:hover {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+  }
+
+  /* Main content container */
+  .main-content {
+    padding: 20px;
+    margin-top: 80px; /* 3 lines below the first line */
+  }
+
+  /* Registration form styling */
+  .registration-form {
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    max-width: 400px;
+    margin: 0 auto;
+    animation: fadeIn 1s ease;
+  }
+
+  /* Fade-in animation for form */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Heading styling */
+  h2 {
+    color: #007BFF;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Input field styling */
+  .w3-input {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 15px;
+    width: 100%;
+    transition: border-color 0.3s ease;
+  }
+
+  .w3-input:focus {
+    border-color: #007BFF;
+    outline: none;
+  }
+
+  /* Button styling */
+  .w3-btn {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+  }
+
+  .w3-btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+</style>
+
+<!-- Navbar -->
 <div class="w3-bar">
- 
   <a class="w3-bar-item w3-right w3-btn w3-teal" href="/car_dealer_portal/login/">Login</a>
   <a class="w3-bar-item w3-right w3-btn w3-teal" href="/">Home</a>
 </div>
-<div class="w3-display-container"  style="height:1000px;">
-<div class="w3-display-middle">
 
-  <b> <h2>Registration Form</h2></b>
-
-<form class="w3-container" action="/car_dealer_portal/registration/" method="POST">{% csrf_token %}
-  <lable>First Name</lable> <input class="w3-input" type="text" name="firstname"><br><br>
-  <lable>Last Name</lable> <input class="w3-input" type="text" name="lastname"><br><br>
-  <lable>Username</lable> <input class="w3-input" type="text" name="username"><br><br>
-  <lable>Password</lable> <input class="w3-input" type="password" name="password"><br><br>
-  <lable>Email</lable> <input class="w3-input" type="text" name="email"><br><br>
-  <lable>Contact</lable> <input class="w3-input" type="text" name="mobile"><br><br>
-  <lable>City</lable> <input class="w3-input" type="text" name="city"><br><br>
-  <lable>Pincode</lable> <input class="w3-input" type="text" name="pincode"><br><br>
-  <input class="w3-btn w3-teal" type="submit"><br><br>
-</form>
+<!-- Main Content -->
+<div class="main-content">
+  <div class="registration-form">
+    <h2>Registration Form</h2>
+    <form class="w3-container" action="/car_dealer_portal/registration/" method="POST">
+      {% csrf_token %}
+      <label>First Name</label>
+      <input class="w3-input" type="text" name="firstname" required><br><br>
+      <label>Last Name</label>
+      <input class="w3-input" type="text" name="lastname" required><br><br>
+      <label>Username</label>
+      <input class="w3-input" type="text" name="username" required><br><br>
+      <label>Password</label>
+      <input class="w3-input" type="password" name="password" required><br><br>
+      <label>Email</label>
+      <input class="w3-input" type="email" name="email" required><br><br>
+      <label>Contact</label>
+      <input class="w3-input" type="text" name="mobile" required><br><br>
+      <label>City</label>
+      <input class="w3-input" type="text" name="city" required><br><br>
+      <label>Pincode</label>
+      <input class="w3-input" type="text" name="pincode" required><br><br>
+      <input class="w3-btn w3-teal" type="submit" value="Register">
+    </form>
+  </div>
 </div>
-</div>
-
 {% endblock %}

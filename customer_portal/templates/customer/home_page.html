@@ -1,19 +1,148 @@
-
 {% extends 'customer/base.html' %}
 {% block content %}
 {% load static %}
+
+<!-- Add a CSS block for vibrant colors and animations -->
+<style>
+  /* Vibrant gradient background */
+  body {
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee, #a18cd1);
+    background-size: 400% 400%;
+    animation: gradientBG 10s ease infinite;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Gradient background animation */
+  @keyframes gradientBG {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* Navbar styling */
+  .w3-bar {
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
+    animation: slideDown 0.5s ease-out;
+    padding: 10px 0;
+  }
+
+  /* Navbar slide-down animation */
+  @keyframes slideDown {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  /* Button styling */
+  .w3-btn {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin: 0 10px;
+    border-radius: 25px; /* Rounded buttons */
+  }
+
+  .w3-btn:hover {
+    background-color: #ff6f61 !important; /* Vibrant coral color */
+    transform: scale(1.05);
+  }
+
+  /* Welcome message styling */
+  .welcome-message {
+    font-size: 2em;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin: 20px 0;
+    animation: fadeIn 2s ease-in;
+  }
+
+  /* Fade-in animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Image container styling */
+  .w3-display-container {
+    height: 500px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Image styling */
+  .w3-display-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+  }
+
+  /* Search button styling */
+  .search-button {
+    background-color: #ff6f61; /* Vibrant coral color */
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.5em;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0 5px 15px rgba(255, 111, 97, 0.4);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .search-button:hover {
+    background-color: #ff4a3d; /* Darker coral on hover */
+    transform: scale(1.1);
+  }
+
+  /* Pulse animation for emphasis */
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .pulse {
+    animation: pulse 2s infinite;
+  }
+</style>
+
 <div class="w3-bar w3-large w3-black">
   <div class="w3-bar-item w3-left w3-black">Customer Portal: {{user.username}}</div>
   <a class="w3-bar-item w3-btn w3-teal w3-right" href="/customer_portal/logout/">Logout</a>
   <a class="w3-bar-item w3-btn w3-teal w3-right" href="/customer_portal/manage/">Manage</a>
 </div>
 
-<div class="w3-container w3-center w3-large" style="padding:20px;">Welcome Traveller, You shall drive the car of your dreams!</div>
+<div class="w3-container w3-center welcome-message">
+  Welcome Traveller, You shall drive the car of your dreams!
+</div>
 
 <div class="w3-display-container w3-center" style="height:500px;padding:20px;">
-<img src="{% static "images/car-pics.jpg" %}">
-<div class="w3-display-middle">
-<a class="w3-btn w3-red w3-xlarge" href="/customer_portal/search/"><b>Search for Rental Cars</b></a>
+  <img src="{% static 'images/car-pics.jpg' %}" alt="Car Rental">
+  <div class="w3-display-middle">
+    <a class="w3-btn search-button pulse" href="/customer_portal/search/"><b>Search for Rental Cars</b></a>
+  </div>
 </div>
-</div>
+
 {% endblock %}

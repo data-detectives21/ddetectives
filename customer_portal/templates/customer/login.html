@@ -1,21 +1,173 @@
 {% extends 'customer/base.html' %}
-
 {% block content %}
 
-{% if form.errors %}
+<!-- Add a CSS block for animations and professional design -->
+<style>
+  /* Vibrant gradient background */
+  body {
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee, #a18cd1);
+    background-size: 400% 400%;
+    animation: gradientBG 10s ease infinite;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
 
-{% endif %}
-<div class="w3-display-container" style="height:500px;">
+  /* Gradient background animation */
+  @keyframes gradientBG {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* Login container styling */
+  .w3-display-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 1.5s ease-in;
+    max-width: 400px;
+    width: 100%;
+  }
+
+  /* Fade-in animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Form input styling */
+  .w3-input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .w3-input:focus {
+    border-color: #009688; /* Teal color */
+    box-shadow: 0 0 8px rgba(0, 150, 136, 0.5);
+    outline: none;
+  }
+
+  /* Button styling */
+  .w3-btn {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border-radius: 25px; /* Rounded buttons */
+    margin: 10px 5px;
+  }
+
+  .w3-btn:hover {
+    transform: scale(1.05);
+  }
+
+  /* Login button styling */
+  .w3-green {
+    background-color: #009688; /* Teal color */
+    color: white;
+  }
+
+  .w3-green:hover {
+    background-color: #00796b; /* Darker teal on hover */
+  }
+
+  /* Register button styling */
+  .w3-red {
+    background-color: #ff6f61; /* Vibrant coral color */
+    color: white;
+  }
+
+  .w3-red:hover {
+    background-color: #ff4a3d; /* Darker coral on hover */
+  }
+
+  /* Home button styling */
+  .w3-teal {
+    background-color: #26a69a; /* Light teal color */
+    color: white;
+  }
+
+  .w3-teal:hover {
+    background-color: #00897b; /* Darker teal on hover */
+  }
+
+  /* Pulse animation for emphasis */
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .pulse {
+    animation: pulse 2s infinite;
+  }
+
+  /* Shake animation for errors */
+  @keyframes shake {
+    0% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-10px);
+    }
+    50% {
+      transform: translateX(10px);
+    }
+    75% {
+      transform: translateX(-10px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  .shake {
+    animation: shake 0.5s ease-in-out;
+  }
+</style>
+
+<div class="w3-display-container">
   <div class="w3-display-middle">
-<form class="w3-container" action="/customer_portal/auth/" method="POST">{% csrf_token %}
-  <lable>Username :</lable> <input class="w3-input" type="text" name="username"><br><br>
-  <lable>Password :</lable> <input class="w3-input" type="password" name="password"><br><br>
-  <input class="w3-btn w3-green" type="submit" value="Login">
-</form><br><br>
-<div class="w3-container">
-<a class="w3-btn w3-red" href="/customer_portal/register/">Register as Customer</a>
-<a class="w3-btn w3-teal" href="/">Home</a>
+    {% if form.errors %}
+      <div class="w3-panel w3-red w3-round shake" style="margin-bottom: 20px;">
+        <p>Invalid username or password. Please try again.</p>
+      </div>
+    {% endif %}
+    <form class="w3-container" action="/customer_portal/auth/" method="POST">{% csrf_token %}
+      <label>Username :</label> <input class="w3-input" type="text" name="username" required><br><br>
+      <label>Password :</label> <input class="w3-input" type="password" name="password" required><br><br>
+      <input class="w3-btn w3-green pulse" type="submit" value="Login">
+    </form><br><br>
+    <div class="w3-container">
+      <a class="w3-btn w3-red" href="/customer_portal/register/">Register as Customer</a>
+      <a class="w3-btn w3-teal" href="/">Home</a>
+    </div>
+  </div>
 </div>
-</div>
-</div>
+
 {% endblock %}
